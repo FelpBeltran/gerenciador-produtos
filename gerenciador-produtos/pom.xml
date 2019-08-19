@@ -17,6 +17,18 @@
             <name>João Gabriel Maurício</name>
             <id>Joaogma1</id>
         </developer>
+        <developer>
+            <name>Marcos Vinicius do Carmo Reis</name>
+            <id>MVDCReis</id>
+        </developer>
+        <developer>
+            <name>Willeneuve </name>
+            <id>Willeneuve90</id>
+        </developer>
+        <developer>
+            <name>Marcos Sakuma </name>
+            <id>r820</id>
+        </developer>
     </developers>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
