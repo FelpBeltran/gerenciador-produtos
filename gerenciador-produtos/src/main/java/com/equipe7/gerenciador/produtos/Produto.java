@@ -28,6 +28,14 @@ public class Produto {
         this.dataCadastro = dataCadastro;
     }
 
+    public Produto(int i, String nome, String descricao, String precocompra, double MIN_NORMAL, int i0, Boolean FALSE, Date dataCadastro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Produto(int i, String nome, String descricao, String precocompra, String precovenda, String quantidade, Boolean FALSE, Date dataCadastro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public Date getDataCadastro() {
         return dataCadastro;
     }
