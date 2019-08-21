@@ -5,6 +5,7 @@
  */
 package com.equipe7.gerenciador.controller;
 
+import com.equipe7.gerenciador.DAO.ProdutoDAO;
 import com.equipe7.gerenciador.controller.helper.MenuPrincipalHelper;
 import view.MenuPrincipal;
 
@@ -21,7 +22,9 @@ public class MenuPrincipalController {
     }
     
     public void addProduto(){
-        
+        //Produto produto = helper.obterModelo();
+        //ProdutoDAO add = new ProdutoDAO();
+        //add.
         this.view.exibeMensagem("Produto adicionado com sucesso! ");
     }
       

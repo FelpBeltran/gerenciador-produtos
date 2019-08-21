@@ -27,6 +27,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         initComponents();
         ApresentarProdutosJTable();
         controller = new MenuPrincipalController(this);
+        
     }
     public ArrayList<Produto> getProdutosList(){
         ArrayList<Produto> produtoList = new ArrayList<Produto>();
