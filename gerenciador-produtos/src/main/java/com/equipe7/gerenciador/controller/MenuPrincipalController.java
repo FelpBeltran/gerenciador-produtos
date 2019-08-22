@@ -7,7 +7,10 @@ package com.equipe7.gerenciador.controller;
 
 import com.equipe7.gerenciador.DAO.ProdutoDAO;
 import com.equipe7.gerenciador.controller.helper.MenuPrincipalHelper;
-import view.MenuPrincipal;
+import com.equipe7.gerenciador.model.Produto;
+import com.equipe7.gerenciador.view.MenuPrincipal;
+import java.util.List;
+
 
 /**
  *
@@ -25,7 +28,29 @@ public class MenuPrincipalController {
         //Produto produto = helper.obterModelo();
         //ProdutoDAO add = new ProdutoDAO();
         //add.
-        this.view.exibeMensagem("Produto adicionado com sucesso! ");
+        Produto produto =helper.obterModelo();
+        
+        ProdutoDAO prod = new ProdutoDAO();
+        
+        this.view.exibeMensagem(prod.cadastrarProduto(produto) ? "Produto adicionado com sucesso!": "falha ao cadastrar");
+        helper.limparTela();
     }
-      
+    public List<Produto> getProdutosList(){
+        ProdutoDAO produtodao = new ProdutoDAO();
+        return produtodao.listarProdutos();
+    }
+    
+    public void removeProduto(int pid){
+        Produto produto =helper.obterModelo();
+        
+        ProdutoDAO prod = new ProdutoDAO();
+        this.view.exibeMensagem( prod.excluirProduto(pid)?"Produto excluído com sucesso!":"falha ao remover produto");
+    }
+  
+    public Produto findProduto(){
+        Produto produto =helper.obterModelo();
+        helper.setarModelo(produto);
+        ProdutoDAO prod = new ProdutoDAO();
+        return produto;
+    }
 }
