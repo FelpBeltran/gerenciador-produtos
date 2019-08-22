@@ -19,7 +19,7 @@ public class ProdutoDAO {
     private static final String URL = "jdbc:mysql://remotemysql.com:3306/YhOjH0lCdr?useTimezone=true&serverTimezone=UTC";
     private static Connection conexao;
 
-    public static boolean cadastrarProduto(Produto prod) {
+    public  boolean cadastrarProduto(Produto prod) {
         boolean retorno = false;
 
         try {
@@ -59,7 +59,7 @@ public class ProdutoDAO {
         return retorno;
     }
 
-    public static List<Produto> listarProdutos() {
+    public  List<Produto> listarProdutos() {
         List<Produto> listaProdutos = new ArrayList<>();
         try {
 
@@ -102,7 +102,7 @@ public class ProdutoDAO {
         return listaProdutos;
     }
 
-    public static Produto buscarProdutoPorID(int pID) {
+    public  Produto buscarProdutoPorID(int pID) {
         Produto prodBuscado = new Produto();
 
         try {
@@ -143,7 +143,7 @@ public class ProdutoDAO {
         return prodBuscado;
     }
 
-    public static boolean editarProduto(Produto p) {
+    public  boolean editarProduto(Produto p) {
         boolean retorno = false;
 
         try {
@@ -186,7 +186,7 @@ public class ProdutoDAO {
         return retorno;
     }
 
-    public static boolean excluirProduto(int pID) {
+    public  boolean excluirProduto(int pID) {
         boolean retorno = false;
 
         try {
@@ -218,4 +218,5 @@ public class ProdutoDAO {
         }
         return retorno;
     }
+
 }

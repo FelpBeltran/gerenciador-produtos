@@ -1,16 +1,16 @@
-package view;
+package com.equipe7.gerenciador.view;
 
 import com.equipe7.gerenciador.controller.MenuPrincipalController;
+import com.equipe7.gerenciador.model.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import produtos.ConnectionFactory;
-import produtos.Produto;
+
 
 /**
  *
@@ -29,32 +29,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         controller = new MenuPrincipalController(this);
         
     }
-    public ArrayList<Produto> getProdutosList(){
-        ArrayList<Produto> produtoList = new ArrayList<Produto>();
-        try{
-        String sql = "select * from produto where ";
-
-        Connection conexao = ConnectionFactory.createConnection();
-        PreparedStatement ps = conexao.prepareStatement(sql);
-
-        ResultSet rs = ps.executeQuery(sql);            
-        Produto produto;
-        while (rs.next()) {
-            
-            produto = new Produto(rs.getInt("ID"),rs.getString("NOME"),rs.getString("DESCRICAO"),
-            rs.getDouble("PRECO_COMPRA"),rs.getDouble("PRECO_VENDA"),rs.getInt("QUANTIDADE"),
-            rs.getBoolean("DISPONIVEL"),rs.getDate("DT_CADASTRO"));
-            produtoList.add(produto);
-            }
-        
-        }catch(SQLException ex){
-            ex.printStackTrace();
-        }
-        return produtoList;
-    }
-            
+    
+         int prodselecionado;   
      public void ApresentarProdutosJTable(){
-     ArrayList<Produto> lista= getProdutosList();
+              
+         List<Produto> lista= controller.getProdutosList();
          DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
          Object[] row = new Object[7];
         for(int i = 0; i < lista.size();i++){
@@ -62,11 +41,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         row[0] = lista.get(i).getId();
         row[1] = lista.get(i).getNome();
         row[2] = lista.get(i).getQuantidade();
-        row[3] = lista.get(i).getPrecoCompra();
-        row[4] = lista.get(i).getPrecoVenda();
-        row[5] = lista.get(i).getDataCadastro();
+        row[3] = lista.get(i).getPreco_Compra();
+        row[4] = lista.get(i).getPreco_Venda();
+        row[5] = lista.get(i).getDt_Cadastro();
         
-        if(lista.get(i).getFlag() == true){
+        if(lista.get(i).isDisponivel() == true){
         row[6] = "Habilitado";
         }else{
           row[6] = "Desabilitado";        
@@ -127,6 +106,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         BotaoExcluir.setText("Excluir");
+        BotaoExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoExcluirActionPerformed(evt);
+            }
+        });
 
         BotaoEditar.setText("Editar");
         BotaoEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +139,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setText("Nome:");
@@ -259,8 +248,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_BotaoAdicionarActionPerformed
 
     private void BotaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoEditarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_BotaoEditarActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       prodselecionado = jTable1.getSelectedRow();
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void BotaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoExcluirActionPerformed
+        this.controller.removeProduto(prodselecionado);
+    }//GEN-LAST:event_BotaoExcluirActionPerformed
 
     /**
      * @param args the command line arguments
